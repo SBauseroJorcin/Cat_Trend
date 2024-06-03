@@ -1,0 +1,121 @@
+#!/usr/bin/env Rscript
+
+# Verificar que se han especificado los argumentos necesarios
+args <- commandArgs(trailingOnly = TRUE)
+
+if (length(args) != 4) {
+  stop("Use program: path/of/file path/of/keywords.txt and SP or EN and number of ngram(separated by space)")
+}
+
+# Librerías necesarias
+required_packages <- c("tidytext", "tidyverse")
+
+# Instalar y cargar las librerías necesarias
+for (pkg in required_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+  library(pkg, character.only = TRUE)
+}
+
+# Función para eliminar tildes de un texto
+remove_accents <- function(texto) {
+  iconv(texto, to = "ASCII//TRANSLIT")
+}
+
+#setwd("/home/usuario/Data_Rstudio/sofiaBausero/CategoricalAndTrendanalysis/")
+
+# Cargará todos los ficheros de los mensajes
+#files <- list.files(path = args[1], pattern = "\\d+")# "datos/actas" ## cambiar esto!!
+
+# Cargar la tabla generada por el segundo script
+tabla_datos <- read.table("code/tabla_datos.txt", sep = "\t", header = FALSE, col.names = c("space", "number"))
+# Formatear las fechas en la columna 'number' de "dd/mm/aaaa" a "dd-mm-aaaa"
+tabla_datos$number <- gsub("/", "-", tabla_datos$number)
+# Basename
+tabla_datos$space <- basename(tabla_datos$space)
+tabla_datos$origin_space <- tabla_datos$space
+# Removed tag
+tabla_datos$space <- gsub("\\.[^.]+$", "", tabla_datos$space)
+
+# Cargar los ficheros de los mensajes
+# files <- list.files(path = args[1], pattern = "\\d+")
+# number <- as.numeric(gsub("[^0-9]", "", files))
+# space <- gsub("[0-9_\\]", "", files)
+# space <- gsub("\\.txt$", "", space)
+
+# IF es numerico, es numerico, else es character, es character agregar condicional!
+infoText <- if (is.numeric(tabla_datos$number[1])) {
+  tibble(
+    number = numeric(),
+    space = character(),
+    paragraph = numeric(),
+    text = character()
+  )
+} else {
+  tibble(
+    number = character(),
+    space = character(),
+    paragraph = numeric(),
+    text = character()
+  )
+}
+
+# Leer los archivos y crear el tibble inicial
+for (i in seq_along(tabla_datos$origin_space)) {
+  speech <- readLines(file.path(args[1], tabla_datos$origin_space[i]))
+  temporal <- tibble(number = tabla_datos$number[i],
+                     space = tabla_datos$space[i],
+                     paragraph = seq_along(speech),
+                     text = speech)
+  infoText <- bind_rows(infoText, temporal)
+}
+
+infoText <- infoText %>%
+  mutate(space = factor(space, levels = unique(space)),
+         number = factor(number))
+
+# Leer las palabras vacías según el idioma especificado
+if (tolower(args[3]) == "sp") {
+  empty <- read_tsv("datos/vacias.txt", col_names = "word")
+} else if (tolower(args[3]) == "en") {
+  empty <- stop_words %>% select(word)
+} else {
+  stop("Invalid language argument. Use 'SP' or 'EN'.")
+}
+
+# Función para generar tokens y filtrar ngrams
+generate_ngrams <- function(infoText, n) {
+  tokens <- infoText %>%
+    unnest_tokens(word, text, token = "ngrams", n = n) %>%
+    separate(word, into = paste0("word", 1:n), sep = " ") %>%
+    filter(across(starts_with("word"), ~ !grepl("\\d+", .) & !(. %in% empty$word))) %>%
+    unite(word, starts_with("word"), sep = " ")
+  
+  return(tokens)
+}
+
+# Generar los ngrams y filtrar
+if (args[4] == "3") {
+  infoText_token <- generate_ngrams(infoText, 3)
+} else if (args[4] == "2") {
+  infoText_token <- generate_ngrams(infoText, 2)
+} else if (args[4] == "1" || args[4] == "") {
+  infoText_token <- infoText %>%
+    unnest_tokens(word, text) %>%
+    filter(!grepl("\\d+", word) & !word %in% empty$word)
+} else {
+  stop("Invalid ngram value. Use 1, 2, or 3.")
+}
+
+# Guardar el resultado en un archivo
+output_dir <- "datos/outputData"
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir, recursive = TRUE)
+}
+
+#
+#date_hour <- format(Sys.time(), "%d-%m-%Y_%H-%M")
+textWord <- file.path("datos/outputData", paste0("words_", date_hour, ".txt"))
+write.table(infoText_token, file = textWord, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+
