@@ -7,10 +7,9 @@ if (length(args) != 4) {
   stop("Use program: path/of/file path/of/keywords.txt and SP or EN and number of ngram(separated by space)")
 }
 
-# Librerías necesarias
+# Necessary libraries
 required_packages <- c("tidytext", "tidyverse")
 
-# Necessary libraries
 for (pkg in required_packages) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     install.packages(pkg)
