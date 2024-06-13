@@ -4,7 +4,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) == 0) {
-  stop("Debe proporcionar un directorio como argumento.")
+  stop("You must provide a directory as an argument.")
 }
 
 library(stringr)
@@ -54,7 +54,7 @@ find_date_in_file <- function(file_path) {
     }
   }
 
-  return(ifelse(is.na(date_found), "Fecha no encontrada", date_found))
+  return(ifelse(is.na(date_found), "Date not found", date_found))
 }
 
 # Function to generate the data table
@@ -72,12 +72,12 @@ directorio <- args[1]
 
 # Check if the directory exists
 if (!file.exists(directorio)) {
-  stop("El directorio especificado no existe.")
+  stop("The specified directory does not exist.")
 }
 
 # Check if there are .txt files in the directory
 if (length(list.files(directorio, pattern = "\\.txt$", full.names = TRUE)) == 0) {
-  stop("No se encontraron archivos .txt en el directorio especificado.")
+  stop("No .txt files were found in the specified directory.")
 }
 
 # Generate and save data table
