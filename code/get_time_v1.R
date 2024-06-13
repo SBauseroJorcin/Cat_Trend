@@ -88,7 +88,7 @@ if (length(list.files(directory, pattern = "\\.txt$", full.names = TRUE)) == 0) 
 tabla_datos <- generate_table(directory)
 
 # Create full file name
-file_name <- paste0("data_table", date_hour, ".txt")
+file_name <- paste0("data_table_", date_hour, ".txt")
 
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
