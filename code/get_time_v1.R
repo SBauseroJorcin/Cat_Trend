@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+# Encapsulate program in a function
+main_get_time <- function() {
+
 # Get the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -84,3 +87,9 @@ if (length(list.files(directorio, pattern = "\\.txt$", full.names = TRUE)) == 0)
 tabla_datos <- generate_table(directorio)
 write.table(tabla_datos, file = "tabla_datos.txt", sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
+}
+
+# Call the main function if the script is run directly
+if (!interactive()) {
+  main_get_time()
+}
