@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
 
 # Encapsulate program in a function
-main_get_time <- function() {
+main_get_time <- function(directory, date_hour) {
 
-# Get the command line arguments
-args <- commandArgs(trailingOnly = TRUE)
+# # Get the command line arguments
+# args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) == 0) {
-  stop("You must provide a directory as an argument.")
-}
+# if (length(args) == 0) {
+#   stop("You must provide a directory as an argument.")
+# }
 
 library(stringr)
 library(lubridate)
@@ -71,25 +71,36 @@ generate_table <- function(dir_path) {
 }
 
 # Directory containing the txt files
-directorio <- args[1]
+directory <- args[1]
+date_hour <- args[2]
 
 # Check if the directory exists
-if (!file.exists(directorio)) {
+if (!file.exists(directory)) {
   stop("The specified directory does not exist.")
 }
 
 # Check if there are .txt files in the directory
-if (length(list.files(directorio, pattern = "\\.txt$", full.names = TRUE)) == 0) {
+if (length(list.files(directory, pattern = "\\.txt$", full.names = TRUE)) == 0) {
   stop("No .txt files were found in the specified directory.")
 }
 
 # Generate and save data table
-tabla_datos <- generate_table(directorio)
-write.table(tabla_datos, file = "tabla_datos.txt", sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+tabla_datos <- generate_table(directory)
+
+# Create full file name
+file_name <- paste0("data_table", date_hour, ".txt")
+
+write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 }
 
 # Call the main function if the script is run directly
 if (!interactive()) {
-  main_get_time()
+  args <- commandArgs(trailingOnly = TRUE)
+  if (length(args) < 1) {
+    stop("You must provide a directory as an argument.")
+  }
+  directorio <- args[1]
+  date_hour <- args[2]
+  main_get_time(directorio, date_hour)
 }
