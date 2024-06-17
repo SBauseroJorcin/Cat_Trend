@@ -3,13 +3,6 @@
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
 
-# # Get the command line arguments
-# args <- commandArgs(trailingOnly = TRUE)
-
-# if (length(args) == 0) {
-#   stop("You must provide a directory as an argument.")
-# }
-
 library(stringr)
 library(lubridate)
 
@@ -70,9 +63,9 @@ generate_table <- function(dir_path) {
   return(t(table))
 }
 
-# Directory containing the txt files
-directory <- args[1]
-date_hour <- args[2]
+# # Directory containing the txt files
+# directory <- args[1]
+# date_hour <- args[2]
 
 # Check if the directory exists
 if (!file.exists(directory)) {
@@ -93,15 +86,3 @@ file_name <- paste0("data_table_", date_hour, ".txt")
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 }
-
-# Call the main function if the script is run directly
-if (!interactive()) {
-  args <- commandArgs(trailingOnly = TRUE)
-  if (length(args) < 1) {
-    stop("You must provide a directory as an argument.")
-  }
-  directorio <- args[1]
-  date_hour <- args[2]
-  main_get_time(directorio, date_hour)
-}
-## WE NEED FIX THIS PROBLEM
