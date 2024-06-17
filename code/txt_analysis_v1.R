@@ -141,3 +141,4 @@ if (!interactive()) {
   date_hour <- args[4]
   main_process_texts(directory, language, ngram, date_hour)
 }
+## WE NEED FIX THIS PROBLEM
