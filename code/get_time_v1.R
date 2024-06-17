@@ -5,6 +5,7 @@ main_get_time <- function(directory, date_hour) {
 
 library(stringr)
 library(lubridate)
+## library need install on init_utilitis
 
 # Function to search the date in a file
 find_date_in_file <- function(file_path) {
@@ -82,7 +83,7 @@ tabla_datos <- generate_table(directory)
 
 # Create full file name
 file_name <- paste0("data_table_", date_hour, ".txt")
-
+## WE ARE GOING TO FIX OUTPUTDATA
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 }
