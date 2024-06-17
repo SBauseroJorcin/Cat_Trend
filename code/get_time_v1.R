@@ -104,3 +104,4 @@ if (!interactive()) {
   date_hour <- args[2]
   main_get_time(directorio, date_hour)
 }
+## WE NEED FIX THIS PROBLEM
