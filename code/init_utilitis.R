@@ -76,3 +76,46 @@ validate_arguments <- function(args) {
     ngram_number = ngram_number
   ))
 }
+
+manage_packages <- function(required_packages) {
+  for (pkg in required_packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      install.packages(pkg)
+    }
+    library(pkg, character.only = TRUE)
+  }
+}
+
+# manage_packages <- function(required_packages) {
+#   # Lista para almacenar los paquetes que no se pudieron instalar
+#   failed_packages <- c()
+  
+#   for (pkg in required_packages) {
+#     if (!requireNamespace(pkg, quietly = TRUE)) {
+#       # Intentar instalar el paquete
+#       tryCatch(
+#         {
+#           install.packages(pkg)
+#         },
+#         error = function(e) {
+#           # Agregar el paquete a la lista de fallidos si hay un error
+#           failed_packages <<- c(failed_packages, pkg)
+#         }
+#       )
+#     }
+    
+#     # Intentar cargar el paquete
+#     if (!requireNamespace(pkg, quietly = TRUE)) {
+#       failed_packages <- c(failed_packages, pkg)
+#     } else {
+#       library(pkg, character.only = TRUE)
+#     }
+#   }
+  
+#   # Informar sobre los paquetes que no se pudieron instalar
+#   if (length(failed_packages) > 0) {
+#     warning("No se pudieron instalar los siguientes paquetes: ", paste(failed_packages, collapse = ", "))
+#   } else {
+#     message("Todos los paquetes se instalaron y cargaron correctamente.")
+#   }
+# }
