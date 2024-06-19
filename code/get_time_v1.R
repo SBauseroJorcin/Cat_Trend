@@ -3,9 +3,8 @@
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
 
-library(stringr)
-library(lubridate)
-## library need install on init_utilitis
+# library(stringr)
+# library(lubridate)
 
 # Function to search the date in a file
 find_date_in_file <- function(file_path) {
