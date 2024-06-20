@@ -127,18 +127,3 @@ textWord <- file.path("datos/outputData/", paste0("words_", date_hour, ".txt"))
 write.table(infoText_token, file = textWord, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
 }
-
-# # Call the main function if the script is run directly
-# if (!interactive()) {
-#   args <- commandArgs(trailingOnly = TRUE)
-#   if (length(args) != 4) {
-#     stop("Use program: path/of/file and SP or EN and number of ngram (separated by space)")
-#   }
-#   directory <- args[1]
-#   #keywords_path <- args[2]
-#   language <- args[2]
-#   ngram <- as.numeric(args[3])
-#   date_hour <- args[4]
-#   main_process_texts(directory, language, ngram, date_hour)
-# }
-## WE NEED FIX THIS PROBLEM
