@@ -9,14 +9,14 @@ main_process_texts <- function(directory, language, ngram, date_hour) {
 # }
 
 # Necessary libraries
-required_packages <- c("tidytext", "tidyverse")
+# required_packages <- c("tidytext", "tidyverse")
 
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
-  }
-  library(pkg, character.only = TRUE)
-}
+# for (pkg in required_packages) {
+#   if (!requireNamespace(pkg, quietly = TRUE)) {
+#     install.packages(pkg)
+#   }
+#   library(pkg, character.only = TRUE)
+# }
 
 # Function to remove accent marks from a text
 remove_accents <- function(texto) {
