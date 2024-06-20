@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-main_process_texts <- function(directory, language, ngram, date_hour) {
+main_process_texts <- function(directory, language, ngram_number, date_hour) {
 # # Verify that the necessary arguments have been specified
 # args <- commandArgs(trailingOnly = TRUE)
 
@@ -102,11 +102,11 @@ generate_ngrams <- function(infoText, n) {
 }
 
 # Generate the ngrams and filter
-if (ngram == "3") {
+if (ngram_number == "3") {
   infoText_token <- generate_ngrams(infoText, 3)
-} else if (ngram == "2") {
+} else if (ngram_number == "2") {
   infoText_token <- generate_ngrams(infoText, 2)
-} else if (ngram == "1" || ngram == "") {
+} else if (ngram_number == "1" || ngram_number == "") {
   infoText_token <- infoText %>%
     unnest_tokens(word, text) %>%
     filter(!grepl("\\d+", word) & !word %in% empty$word)
