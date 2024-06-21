@@ -81,7 +81,9 @@ generate_ngrams <- function(infoText, n) {
 }
 
 # Generate the ngrams and filter
-if (ngram_number == "3") {
+if (ngram_number == "4") {
+  infoText_token <- generate_ngrams(infoText, 4)
+} else if (ngram_number == "3") {
   infoText_token <- generate_ngrams(infoText, 3)
 } else if (ngram_number == "2") {
   infoText_token <- generate_ngrams(infoText, 2)
