@@ -1,32 +1,11 @@
 #!/usr/bin/env Rscript
 
 main_process_texts <- function(directory, language, ngram_number, date_hour) {
-# # Verify that the necessary arguments have been specified
-# args <- commandArgs(trailingOnly = TRUE)
-
-# if (length(args) != 4) {
-#   stop("Use program: path/of/file path/of/keywords.txt and SP or EN and number of ngram(separated by space)")
-# }
-
-# Necessary libraries
-# required_packages <- c("tidytext", "tidyverse")
-
-# for (pkg in required_packages) {
-#   if (!requireNamespace(pkg, quietly = TRUE)) {
-#     install.packages(pkg)
-#   }
-#   library(pkg, character.only = TRUE)
-# }
 
 # Function to remove accent marks from a text
 remove_accents <- function(texto) {
   iconv(texto, to = "ASCII//TRANSLIT")
 }
-
-#setwd("/home/usuario/Data_Rstudio/sofiaBausero/CategoricalAndTrendanalysis/")
-
-# Cargará todos los ficheros de los mensajes
-#files <- list.files(path = args[1], pattern = "\\d+")# "datos/actas" ## cambiar esto!!
 
 file_name <- paste0("data_table_", date_hour, ".txt")
 
