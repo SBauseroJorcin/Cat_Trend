@@ -76,7 +76,7 @@ validate_arguments <- function(args) {
     ngram_number = ngram_number
   ))
 }
-
+## NEED SHOW INFORMATION TO USER OF LIBRARY
 manage_packages <- function(required_packages) {
   for (pkg in required_packages) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
