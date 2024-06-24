@@ -101,9 +101,6 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-#
-#date_hour <- format(Sys.time(), "%d-%m-%Y_%H-%M")
-# date_hour <-  args[4]
 textWord <- file.path("datos/outputData/", paste0("words_", date_hour, ".txt"))
 write.table(infoText_token, file = textWord, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
