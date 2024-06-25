@@ -63,10 +63,6 @@ generate_table <- function(dir_path) {
   return(t(table))
 }
 
-# # Directory containing the txt files
-# directory <- args[1]
-# date_hour <- args[2]
-
 # Check if the directory exists
 if (!file.exists(directory)) {
   stop("The specified directory does not exist.")
