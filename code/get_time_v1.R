@@ -3,9 +3,6 @@
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
 
-# library(stringr)
-# library(lubridate)
-
 # Function to search the date in a file
 find_date_in_file <- function(file_path) {
   # Date patterns in Spanish and English
