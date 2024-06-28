@@ -30,29 +30,64 @@ data_table$space <- gsub("\\.[^.]+$", "", data_table$space)
 # space <- gsub("\\.txt$", "", space)
 
 # IF is numeric, is numeric, else is character, is character add conditional!
+# infoText <- if (is.numeric(data_table$number[1])) {
+#   tibble(
+#     number = numeric(),
+#     space = character(),
+#     paragraph = numeric(),
+#     text = character()
+#   )
+# } else {
+#   tibble(
+#     number = character(),
+#     space = character(),
+#     paragraph = numeric(),
+#     text = character()
+#   )
+# }
 infoText <- if (is.numeric(data_table$number[1])) {
   tibble(
     number = numeric(),
     space = character(),
     paragraph = numeric(),
-    text = character()
+    text = character(),
+    total_words = numeric()
   )
 } else {
   tibble(
     number = character(),
     space = character(),
     paragraph = numeric(),
-    text = character()
+    text = character(),
+    total_words = numeric()
   )
 }
 
 # Read the files and create the initial tibble
+# for (i in seq_along(data_table$origin_space)) {
+#   speech <- readLines(file.path(directory, data_table$origin_space[i]))
+#   temporal <- tibble(number = data_table$number[i],
+#                      space = data_table$space[i],
+#                      paragraph = seq_along(speech),
+#                      text = speech)
+#   infoText <- bind_rows(infoText, temporal)
+# }
+
 for (i in seq_along(data_table$origin_space)) {
   speech <- readLines(file.path(directory, data_table$origin_space[i]))
+  
+  # Contar las palabras de cada párrafo
+  word_counts <- sapply(strsplit(speech, "\\s+"), length)
+  
+  # Calcular el total de palabras en el documento
+  total_words <- sum(word_counts, na.rm = TRUE)
+  
   temporal <- tibble(number = data_table$number[i],
                      space = data_table$space[i],
                      paragraph = seq_along(speech),
-                     text = speech)
+                     text = speech,
+                     total_words = total_words)
+  
   infoText <- bind_rows(infoText, temporal)
 }
 
