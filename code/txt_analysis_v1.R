@@ -76,10 +76,10 @@ infoText <- if (is.numeric(data_table$number[1])) {
 for (i in seq_along(data_table$origin_space)) {
   speech <- readLines(file.path(directory, data_table$origin_space[i]))
   
-  # Contar las palabras de cada párrafo
+  # Count the words in each paragraph
   word_counts <- sapply(strsplit(speech, "\\s+"), length)
   
-  # Calcular el total de palabras en el documento
+  # Calculate the total words in the document
   total_words <- sum(word_counts, na.rm = TRUE)
   
   temporal <- tibble(number = data_table$number[i],
