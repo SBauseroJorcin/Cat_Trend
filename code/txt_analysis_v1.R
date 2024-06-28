@@ -23,12 +23,6 @@ data_table$origin_space <- data_table$space
 # Removed tag
 data_table$space <- gsub("\\.[^.]+$", "", data_table$space)
 
-# Cargar los ficheros de los mensajes
-# files <- list.files(path = args[1], pattern = "\\d+")
-# number <- as.numeric(gsub("[^0-9]", "", files))
-# space <- gsub("[0-9_\\]", "", files)
-# space <- gsub("\\.txt$", "", space)
-
 # IF is numeric, is numeric, else is character, is character add conditional!
 # infoText <- if (is.numeric(data_table$number[1])) {
 #   tibble(
