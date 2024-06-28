@@ -50,16 +50,16 @@ infoText <- if (is.numeric(data_table$number[1])) {
     number = numeric(),
     space = character(),
     paragraph = numeric(),
-    text = character(),
-    total_words = numeric()
+    total_words = numeric(),
+    text = character()
   )
 } else {
   tibble(
     number = character(),
     space = character(),
     paragraph = numeric(),
-    text = character(),
-    total_words = numeric()
+    total_words = numeric(),
+    text = character()
   )
 }
 
@@ -85,8 +85,8 @@ for (i in seq_along(data_table$origin_space)) {
   temporal <- tibble(number = data_table$number[i],
                      space = data_table$space[i],
                      paragraph = seq_along(speech),
-                     text = speech,
-                     total_words = total_words)
+                     total_words = total_words,
+                     text = speech)
   
   infoText <- bind_rows(infoText, temporal)
 }
