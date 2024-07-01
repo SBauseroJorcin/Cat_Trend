@@ -45,7 +45,7 @@ infoText <- if (is.numeric(data_table$date[1])) {
     date = numeric(),
 #    document = character(),
     paragraph = numeric(),
-    total_words = numeric(),
+#    total_words = numeric(),
     text = character()
   )
 } else {
@@ -54,7 +54,7 @@ infoText <- if (is.numeric(data_table$date[1])) {
     date = character(),
 #    document = character(),
     paragraph = numeric(),
-    total_words = numeric(),
+#    total_words = numeric(),
     text = character()
   )
 }
@@ -76,13 +76,13 @@ for (i in seq_along(data_table$origin_document)) {
   word_counts <- sapply(strsplit(speech, "\\s+"), length)
   
   # Calculate the total words in the document
-  total_words <- sum(word_counts, na.rm = TRUE)
+#  total_words <- sum(word_counts, na.rm = TRUE)
   
   temporal <- tibble(document = data_table$document[i],
                      date = data_table$date[i],
 #                     document = data_table$document[i],
                      paragraph = seq_along(speech),
-                     total_words = total_words,
+#                     total_words = total_words,
                      text = speech)
   
   infoText <- bind_rows(infoText, temporal)
