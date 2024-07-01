@@ -4,8 +4,9 @@
 source("code/init_utilitis.R")
 source("code/get_time_v1.R")
 source("code/txt_analysis_v1.R")
+source("code/txt_frequency.R")
 
-required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse")
+required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
 manage_packages(required_packages)
 
 # Obtener los argumentos de la línea de comandos
