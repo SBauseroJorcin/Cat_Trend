@@ -26,31 +26,33 @@ data_table$document <- gsub("\\.[^.]+$", "", data_table$document)
 # IF is numeric, is numeric, else is character, is character add conditional!
 # infoText <- if (is.numeric(data_table$date[1])) {
 #   tibble(
-#     date = numeric(),
 #     document = character(),
+#     date = numeric(),
 #     paragraph = numeric(),
 #     text = character()
 #   )
 # } else {
 #   tibble(
-#     date = character(),
 #     document = character(),
+#     date = character(),
 #     paragraph = numeric(),
 #     text = character()
 #   )
 # }
 infoText <- if (is.numeric(data_table$date[1])) {
   tibble(
-    date = numeric(),
     document = character(),
+    date = numeric(),
+#    document = character(),
     paragraph = numeric(),
     total_words = numeric(),
     text = character()
   )
 } else {
   tibble(
-    date = character(),
     document = character(),
+    date = character(),
+#    document = character(),
     paragraph = numeric(),
     total_words = numeric(),
     text = character()
@@ -60,8 +62,8 @@ infoText <- if (is.numeric(data_table$date[1])) {
 # Read the files and create the initial tibble
 # for (i in seq_along(data_table$origin_document)) {
 #   speech <- readLines(file.path(directory, data_table$origin_document[i]))
-#   temporal <- tibble(date = data_table$date[i],
-#                      document = data_table$document[i],
+#   temporal <- tibble(document = data_table$document[i],
+#                      date = data_table$date[i],
 #                      paragraph = seq_along(speech),
 #                      text = speech)
 #   infoText <- bind_rows(infoText, temporal)
@@ -76,8 +78,9 @@ for (i in seq_along(data_table$origin_document)) {
   # Calculate the total words in the document
   total_words <- sum(word_counts, na.rm = TRUE)
   
-  temporal <- tibble(date = data_table$date[i],
-                     document = data_table$document[i],
+  temporal <- tibble(document = data_table$document[i],
+                     date = data_table$date[i],
+#                     document = data_table$document[i],
                      paragraph = seq_along(speech),
                      total_words = total_words,
                      text = speech)
