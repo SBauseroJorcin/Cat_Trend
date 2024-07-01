@@ -25,6 +25,7 @@ data_table$date <- gsub("/", "-", data_table$date)
 
 # Basename
 data_table$document <- basename(data_table$document)
+data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## TEST
 data_table$origin_document <- data_table$document
 
 # Removed tag
