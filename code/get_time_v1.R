@@ -73,8 +73,14 @@ if (length(list.files(directory, pattern = "\\.txt$", full.names = TRUE)) == 0) 
 # Generate and save data table
 tabla_datos <- generate_table(directory)
 
+# Save the result to a file
+output_dir <- "/output"
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir, recursive = TRUE)
+}
+
 # Create full file name
-file_name <- paste0("data_table_", date_hour, ".txt")
+file_name <- file.path("output/", paste0("data_table_", date_hour, ".txt"))
 ## WE ARE GOING TO FIX OUTPUTDATA
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
