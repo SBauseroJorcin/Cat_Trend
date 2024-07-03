@@ -81,7 +81,7 @@ if (!dir.exists(output_dir)) {
 
 # Create full file name
 file_name <- file.path("output/", paste0("data_table_", date_hour, ".txt"))
-## WE ARE GOING TO FIX OUTPUTDATA
+
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 }
