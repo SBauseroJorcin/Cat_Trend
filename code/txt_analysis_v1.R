@@ -25,8 +25,9 @@ data_table$date <- gsub("/", "-", data_table$date)
 
 # Basename
 data_table$document <- basename(data_table$document)
-data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## TEST
 data_table$origin_document <- data_table$document
+data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## TEST
+
 
 # Removed tag
 data_table$document <- gsub("\\.[^.]+$", "", data_table$document)
@@ -136,12 +137,12 @@ if (ngram_number == "4") {
 }
 
 # Save the result to a file
-output_dir <- "datos/outputData"
+output_dir <- "/output"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
-textWord <- file.path("datos/outputData/", paste0("words_", date_hour, ".txt"))
+textWord <- file.path("output/", paste0("words_", date_hour, ".txt"))
 write.table(infoText_token, file = textWord, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
 }
