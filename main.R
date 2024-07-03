@@ -34,6 +34,7 @@ ngram_number <- validated_args$ngram_number
 # Llamar a la función principal del script externo
 main_get_time(directory, date_hour)
 main_process_texts(directory, language, ngram_number, date_hour)
+analyze_frequency(date_hour)
 
 # # Separar los argumentos dependiendo del modo
 # if (mode == "manual") {
