@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# Cargar funciones desde functions.R
+# Load functions from functions.R
 source("code/init_utilitis.R")
 source("code/get_time_v1.R")
 source("code/txt_analysis_v1.R")
@@ -9,7 +9,7 @@ source("code/txt_frequency.R")
 required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
 manage_packages(required_packages)
 
-# Obtener los argumentos de la línea de comandos
+# Get command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
 # Verificar si se proporcionaron argumentos o si se solicita la ayuda
@@ -21,17 +21,17 @@ if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
 # Get current date and time (only once)
 date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
-# Validar los argumentos y obtener los valores validados
+# Validate arguments and get validated values
 validated_args <- validate_arguments(args)
 
-# Asignar los valores validados a variables para su uso posterior
+# Assign validated values ​​to variables for later use
 mode <- validated_args$mode
 directory <- validated_args$directory
 keywords_file <- validated_args$keywords_file
 language <- validated_args$language
 ngram_number <- validated_args$ngram_number
 
-# Llamar a la función principal del script externo
+# Call main function of external script
 main_get_time(directory, date_hour)
 main_process_texts(directory, language, ngram_number, date_hour)
 analyze_frequency(date_hour)
