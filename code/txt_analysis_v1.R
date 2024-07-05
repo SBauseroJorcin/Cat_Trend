@@ -137,7 +137,7 @@ if (ngram_number == "4") {
 }
 
 # Save the result to a file
-output_dir <- "/output"
+output_dir <- "output"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
