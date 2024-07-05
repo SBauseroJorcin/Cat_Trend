@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 
+cat("🔄 Start of processing________________________________________________________\n")
+
 # Load functions from functions.R
 source("code/init_utilitis.R")
 source("code/get_time_v1.R")
