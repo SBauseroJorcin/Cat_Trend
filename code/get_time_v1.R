@@ -74,7 +74,7 @@ if (length(list.files(directory, pattern = "\\.txt$", full.names = TRUE)) == 0) 
 tabla_datos <- generate_table(directory)
 
 # Save the result to a file
-output_dir <- "/output"
+output_dir <- "output"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
