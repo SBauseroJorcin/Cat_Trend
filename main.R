@@ -33,7 +33,13 @@ date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 # Assign parsed values to variables for later use
 directory <- args$file
 language <- args$language
-ngram_number <- args$tokens
+ngram_number <- args$ngram
+
+# Print arguments for debugging
+cat("📂 Directory:", directory, "\n")
+cat("🗣️ Language:", language, "\n")
+cat("🔢 N-gram number:", ngram_number, "\n")
+
 
 # Llamar a las funciones principales
 cat("\n📊 Preparing data...\n\n")
