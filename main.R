@@ -36,9 +36,9 @@ language <- args$language
 ngram_number <- args$ngram
 
 # Print arguments for debugging
-cat("📂 Directory:", directory, "\n")
-cat("🗣️ Language:", language, "\n")
-cat("🔢 N-gram number:", ngram_number, "\n")
+cat("\n\t📂 Directory:", directory, "\n")
+cat("\t🗣️ Language:", language, "\n")
+cat("\t🔢 N-gram number:", ngram_number, "\n")
 
 
 # Llamar a las funciones principales
