@@ -9,11 +9,14 @@ source("code/txt_frequency.R")
 # Get command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-# Verificar si se proporcionaron argumentos o si se solicita la ayuda
+# Check if arguments were provided or if help is requested
 if (length(args) == 0 || "--help" %in% args || "-h" %in% args) {
   help_function()
   quit(save = "no")
 }
+
+# Parse the arguments ## CHECK
+#parsed_args <- parse_args(args)
 
 cat("🔄 Start of processing________________________________________________________\n")
 
