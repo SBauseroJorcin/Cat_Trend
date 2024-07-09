@@ -1,45 +1,48 @@
 #!/usr/bin/env Rscript
 
-cat("🔄 Start of processing________________________________________________________\n")
-
 # Load functions from functions.R
 source("code/init_utilitis.R")
 source("code/get_time_v1.R")
 source("code/txt_analysis_v1.R")
 source("code/txt_frequency.R")
 
+# Get command line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+# Verificar si se proporcionaron argumentos o si se solicita la ayuda
+if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
+  help_function()
+  quit(save = "no")
+}
+
+cat("🔄 Start of processing________________________________________________________\n")
+
 cat("📖 Installing and loading libraries...\n")
 
-required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2", "argparse")
+required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
 manage_packages(required_packages)
 
-# Load the argparse library
-library(argparse)
+# # Get command line arguments
+# args <- commandArgs(trailingOnly = TRUE)
 
-# Create a parser object
-parser <- ArgumentParser(description='Process some text files.')
-
-# Add arguments
-parser$add_argument("--file", required=TRUE, help="Directory containing text files")
-parser$add_argument("--language", required=TRUE, help="Language of the text files")
-parser$add_argument("--ngram", type="integer", required=TRUE, help="Number of n-gram analysis")
-
-# Parse the arguments
-args <- parser$parse_args()
+# # Verificar si se proporcionaron argumentos o si se solicita la ayuda
+# if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
+#   help_function()
+#   quit(save = "no")
+# }
 
 # Get current date and time (only once)
 date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
-# Assign parsed values to variables for later use
-directory <- args$file
-language <- args$language
-ngram_number <- args$ngram
+# Validate arguments and get validated values
+validated_args <- validate_arguments(args)
 
-# Print arguments for debugging
-cat("\n\t📂 Directory:", directory, "\n")
-cat("\t🗣️ Language:", language, "\n")
-cat("\t🔢 N-gram number:", ngram_number, "\n")
-
+# Assign validated values ​​to variables for later use
+mode <- validated_args$mode
+directory <- validated_args$directory
+keywords_file <- validated_args$keywords_file
+language <- validated_args$language
+ngram_number <- validated_args$ngram_number
 
 # Llamar a las funciones principales
 cat("\n📊 Preparing data...\n\n")
@@ -52,8 +55,8 @@ cat("\n🧮 Performing analysis...\n\n")
 
 analyze_frequency(date_hour)
 
-cat("\n✅ Processing completed successfully.\n\n")
 
+cat("\n✅ Processing completed successfully.\n\n")
 # #!/usr/bin/env Rscript
 
 # cat("🔄 Start of processing________________________________________________________\n")
@@ -66,30 +69,36 @@ cat("\n✅ Processing completed successfully.\n\n")
 
 # cat("📖 Installing and loading libraries...\n")
 
-# required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
+# required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2", "argparse")
 # manage_packages(required_packages)
 
-# # Get command line arguments
-# args <- commandArgs(trailingOnly = TRUE)
+# # Load the argparse library
+# library(argparse)
 
-# # Verificar si se proporcionaron argumentos o si se solicita la ayuda
-# if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
-#   help_function()
-#   quit(save = "no")
-# }
+# # Create a parser object
+# parser <- ArgumentParser(description='Process some text files.')
+
+# # Add arguments
+# parser$add_argument("--file", required=TRUE, help="Directory containing text files")
+# parser$add_argument("--language", required=TRUE, help="Language of the text files")
+# parser$add_argument("--ngram", type="integer", required=TRUE, help="Number of n-gram analysis")
+
+# # Parse the arguments
+# args <- parser$parse_args()
 
 # # Get current date and time (only once)
 # date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
-# # Validate arguments and get validated values
-# validated_args <- validate_arguments(args)
+# # Assign parsed values to variables for later use
+# directory <- args$file
+# language <- args$language
+# ngram_number <- args$ngram
 
-# # Assign validated values ​​to variables for later use
-# mode <- validated_args$mode
-# directory <- validated_args$directory
-# keywords_file <- validated_args$keywords_file
-# language <- validated_args$language
-# ngram_number <- validated_args$ngram_number
+# # Print arguments for debugging
+# cat("\n\t📂 Directory:", directory, "\n")
+# cat("\t🗣️ Language:", language, "\n")
+# cat("\t🔢 N-gram number:", ngram_number, "\n")
+
 
 # # Llamar a las funciones principales
 # cat("\n📊 Preparing data...\n\n")
@@ -102,8 +111,9 @@ cat("\n✅ Processing completed successfully.\n\n")
 
 # analyze_frequency(date_hour)
 
-
 # cat("\n✅ Processing completed successfully.\n\n")
+
+
 
 # # Separar los argumentos dependiendo del modo
 # if (mode == "manual") {
