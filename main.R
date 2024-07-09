@@ -10,7 +10,7 @@ source("code/txt_frequency.R")
 args <- commandArgs(trailingOnly = TRUE)
 
 # Verificar si se proporcionaron argumentos o si se solicita la ayuda
-if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
+if (length(args) == 0 || "--help" %in% args || "-h" %in% args) {
   help_function()
   quit(save = "no")
 }
