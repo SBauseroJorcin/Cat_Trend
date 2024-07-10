@@ -3,7 +3,7 @@
 # Source the plotting script
 source("code/plotting.R")
 
-# Main function
+# Main function of frequency analyze
 analyze_frequency <- function(date_hour) {
   
   # Read data words
