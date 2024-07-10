@@ -22,9 +22,6 @@ validated_args <- tryCatch(validate_arguments(args), error = function(e) {
   quit(save = "no")
 })
 
-# Show the validated arguments (for debugging purposes)
-print(validated_args)
-
 # Parse the arguments ## CHECK
 #parsed_args <- parse_args(args)
 
