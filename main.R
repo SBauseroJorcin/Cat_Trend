@@ -15,6 +15,16 @@ if (length(args) == 0 || "--help" %in% args || "-h" %in% args) {
   quit(save = "no")
 }
 
+# Validate and parse arguments
+validated_args <- tryCatch(validate_arguments(args), error = function(e) {
+  cat("Error in validate_arguments:", e$message, "\n")
+  help_function()
+  quit(save = "no")
+})
+
+# Show the validated arguments (for debugging purposes)
+print(validated_args)
+
 # Parse the arguments ## CHECK
 #parsed_args <- parse_args(args)
 
@@ -28,11 +38,11 @@ manage_packages(required_packages)
 # Get current date and time (only once)
 date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
-# Validate arguments and get validated values
-validated_args <- validate_arguments(args)
+# # Validate arguments and get validated values
+# validated_args <- validate_arguments(args)
 
-# Assign validated values ​​to variables for later use
-mode <- validated_args$mode
+# # Assign validated values ​​to variables for later use
+#mode <- validated_args$mode
 directory <- validated_args$directory
 keywords_file <- validated_args$keywords_file
 language <- validated_args$language
