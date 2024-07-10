@@ -30,52 +30,59 @@ help_function <- function() {
 
 # Function to validate the arguments
 validate_arguments <- function(args) {
-  if (length(args) == 3) {
-    mode <- "auto"
-    directory <- args[1]
-    language <- args[2]
-    ngram_number <- as.integer(args[3])
-  } else if (length(args) == 4) {
-    mode <- "manual"
-    directory <- args[1]
-    keywords_file <- args[2]
-    language <- args[3]
-    ngram_number <- as.integer(args[4])
-  } else {
-    stop("Program usage:\n",
-         "\tFor automatic categories: path/de/file language ngram\n",
-         "\tFor manual categories: path/de/file path/de/keywords.txt language ngram\n")
+  # Parse arguments manually
+  directory <- NULL
+  keywords_file <- NULL
+  language <- NULL
+  ngram_number <- NULL
+
+  for (i in seq_along(args)) {
+    if (args[i] == "--file" && (i + 1) <= length(args)) {
+      directory <- args[i + 1]
+    } else if (args[i] == "--keywords" && (i + 1) <= length(args)) {
+      keywords_file <- args[i + 1]
+    } else if (args[i] == "--language" && (i + 1) <= length(args)) {
+      language <- args[i + 1]
+    } else if (args[i] == "--ngram" && (i + 1) <= length(args)) {
+      ngram_number <- as.integer(args[i + 1])
+    }
   }
-  
+
+  # Check if all necessary arguments were provided
+  if (is.null(directory) || is.null(language) || is.null(ngram_number)) {
+    stop("Program usage:\n",
+         "\tFor categories: ./main.R --file directory [--keywords keywords_file] --language SP|EN --ngram ngram\n")
+  }
+
   # Validate that the directory exists
   if (!file.exists(directory) || !file.info(directory)$isdir) {
-    stop("The first argument must be a valid path to an existing directory")
+    stop("The --file argument must be a valid path to an existing directory")
   }
-  
-  # Validate keyword file if in manual mode
-  if (mode == "manual" && (!file.exists(keywords_file) || file.info(keywords_file)$isdir)) {
-    stop("The second argument in manual mode must be a valid path to an existing keyword file")
+
+  # Validate keyword file if provided
+  if (!is.null(keywords_file) && (!file.exists(keywords_file) || file.info(keywords_file)$isdir)) {
+    stop("The --keywords argument must be a valid path to an existing keyword file, if provided")
   }
-  
+
   # Validate the language
   if (!language %in% c("SP", "EN")) {
-    stop("The third argument must be 'SP' or 'EN'")
+    stop("The --language argument must be 'SP' or 'EN'")
   }
-  
+
   # Validate ngram number
-  if (is.na(ngram_number) || ngram_number <= 0) {
-    stop("The last argument must be a positive integer >= 1 & <= 3")
+  if (is.na(ngram_number) || ngram_number <= 0 || ngram_number > 3) {
+    stop("The --ngram argument must be a positive integer >= 1 and <= 3")
   }
-  
-  # Return the validated values and the mode
+
+  # Return the validated values
   return(list(
-    mode = mode,
     directory = directory,
-    keywords_file = if (mode == "manual") keywords_file else NULL,
+    keywords_file = keywords_file,
     language = language,
     ngram_number = ngram_number
   ))
 }
+
 ## NEED SHOW INFORMATION TO USER OF LIBRARY
 manage_packages <- function(required_packages) {
   for (pkg in required_packages) {
@@ -120,30 +127,30 @@ manage_packages <- function(required_packages) {
 #   }
 # }
 
-# Function to parse arguments
-parse_args <- function(args) {
-  # Inicializar variables para los argumentos
-  directory <- NULL
-  language <- NULL
-  ngram_number <- NULL
+# # Function to parse arguments
+# parse_args <- function(args) {
+#   # Inicializar variables para los argumentos
+#   directory <- NULL
+#   language <- NULL
+#   ngram_number <- NULL
   
-  # Parse arguments manually
-  for (i in seq_along(args)) {
-    if (args[i] == "--file" && (i + 1) <= length(args)) {
-      directory <- args[i + 1]
-    } else if (args[i] == "--language" && (i + 1) <= length(args)) {
-      language <- args[i + 1]
-    } else if (args[i] == "--ngram" && (i + 1) <= length(args)) {
-      ngram_number <- as.integer(args[i + 1])
-    }
-  }
+#   # Parse arguments manually
+#   for (i in seq_along(args)) {
+#     if (args[i] == "--file" && (i + 1) <= length(args)) {
+#       directory <- args[i + 1]
+#     } else if (args[i] == "--language" && (i + 1) <= length(args)) {
+#       language <- args[i + 1]
+#     } else if (args[i] == "--ngram" && (i + 1) <= length(args)) {
+#       ngram_number <- as.integer(args[i + 1])
+#     }
+#   }
   
-  # Check if all necessary arguments were provided
-  if (is.null(directory) || is.null(language) || is.null(ngram_number)) {
-    cat("Error: faltan argumentos requeridos.\n")
-    help_function()
-    quit(save = "no")
-  }
+#   # Check if all necessary arguments were provided
+#   if (is.null(directory) || is.null(language) || is.null(ngram_number)) {
+#     cat("Error: faltan argumentos requeridos.\n")
+#     help_function()
+#     quit(save = "no")
+#   }
   
-  list(directory = directory, language = language, ngram_number = ngram_number)
-}
+#   list(directory = directory, language = language, ngram_number = ngram_number)
+# }
