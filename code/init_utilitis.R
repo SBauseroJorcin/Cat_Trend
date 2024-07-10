@@ -133,7 +133,7 @@ parse_args <- function(args) {
       directory <- args[i + 1]
     } else if (args[i] == "--language" && (i + 1) <= length(args)) {
       language <- args[i + 1]
-    } else if (args[i] == "--tokens" && (i + 1) <= length(args)) {
+    } else if (args[i] == "--ngram" && (i + 1) <= length(args)) {
       ngram_number <- as.integer(args[i + 1])
     }
   }
