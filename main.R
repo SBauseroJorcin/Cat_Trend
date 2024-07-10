@@ -25,15 +25,6 @@ cat("📖 Installing and loading libraries...\n")
 required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
 manage_packages(required_packages)
 
-# # Get command line arguments
-# args <- commandArgs(trailingOnly = TRUE)
-
-# # Verificar si se proporcionaron argumentos o si se solicita la ayuda
-# if (length(args) == 0 || "-help" %in% args || "-h" %in% args ) {
-#   help_function()
-#   quit(save = "no")
-# }
-
 # Get current date and time (only once)
 date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
