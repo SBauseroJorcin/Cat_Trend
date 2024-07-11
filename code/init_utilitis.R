@@ -126,31 +126,3 @@ manage_packages <- function(required_packages) {
 #     message("Todos los paquetes se instalaron y cargaron correctamente.")
 #   }
 # }
-
-# # Function to parse arguments
-# parse_args <- function(args) {
-#   # Inicializar variables para los argumentos
-#   directory <- NULL
-#   language <- NULL
-#   ngram_number <- NULL
-  
-#   # Parse arguments manually
-#   for (i in seq_along(args)) {
-#     if (args[i] == "--file" && (i + 1) <= length(args)) {
-#       directory <- args[i + 1]
-#     } else if (args[i] == "--language" && (i + 1) <= length(args)) {
-#       language <- args[i + 1]
-#     } else if (args[i] == "--ngram" && (i + 1) <= length(args)) {
-#       ngram_number <- as.integer(args[i + 1])
-#     }
-#   }
-  
-#   # Check if all necessary arguments were provided
-#   if (is.null(directory) || is.null(language) || is.null(ngram_number)) {
-#     cat("Error: faltan argumentos requeridos.\n")
-#     help_function()
-#     quit(save = "no")
-#   }
-  
-#   list(directory = directory, language = language, ngram_number = ngram_number)
-# }
