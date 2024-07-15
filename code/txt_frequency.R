@@ -26,20 +26,20 @@ analyze_frequency <- function(date_hour) {
   
   # Plot term frequency distribution
   term_frequency_plot <- plot_term_frequency(docs_words, title="Distribución de Frecuencia de Términos", xlab="Frecuencia de Términos", ylab="Conteo")
-  #save_plot_to_pdf(term_frequency_plot, paste0("term_frequency_", date_hour, ".pdf"))
+  #save_plot_to_pdf(term_frequency_plot, paste0("output/term_frequency_", date_hour, ".pdf"))
 
   # Plot yearly frequency for all words
   yearly_frequency_plot <- plot_yearly_frequency(data_words, title="Frecuencia Anual de Todas las Palabras", xlab="Año", ylab="Frecuencia")
   print(yearly_frequency_plot)
-  #save_plot_to_pdf(yearly_frequency_plot, paste0("yearly_frequency_", date_hour, ".pdf"))
+  #save_plot_to_pdf(yearly_frequency_plot, paste0("output/yearly_frequency_", date_hour, ".pdf"))
   
   # Apply Zipf's Law and plot
   zipfs_law_plot <- plot_zipfs_law(docs_words, title="Ley de Zipf", xlab="Rango", ylab="Frecuencia de Término")
-  #save_plot_to_pdf(zipfs_law_plot, paste0("zipfs_law_", date_hour, ".pdf"))
+  #save_plot_to_pdf(zipfs_law_plot, paste0("output/zipfs_law_", date_hour, ".pdf"))
   
   # Calculate TF-IDF and plot
   docs_words <- docs_words %>%
     bind_tf_idf(word, document, n)
   tf_idf_plot <- plot_tf_idf(docs_words, title="Top 10 Palabras por TF-IDF", xlab=NULL, ylab="tf-idf")
-  #save_plot_to_pdf(tf_idf_plot, paste0("tf_idf_", date_hour, ".pdf"))
+  save_plot_to_pdf(tf_idf_plot, paste0("output/tf_idf_", date_hour, ".pdf"))
 }
