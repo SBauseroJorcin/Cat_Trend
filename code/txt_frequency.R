@@ -33,11 +33,6 @@ analyze_frequency <- function(date_hour) {
   # Plot term frequency distribution
   term_frequency_plot <- plot_term_frequency(docs_words, title="Distribución de Frecuencia de Términos", xlab="Frecuencia de Términos", ylab="Conteo")
   save_plot_to_pdf(term_frequency_plot, paste0("output/frequency/term_frequency_", date_hour, ".pdf"))
-
-  # Plot yearly frequency for all words
-  # yearly_frequency_plot <- plot_yearly_frequency(data_words, title="Frecuencia Anual de Todas las Palabras", xlab="Año", ylab="Frecuencia")
-  # print(yearly_frequency_plot)
-  # save_plot_to_pdf(yearly_frequency_plot, paste0("output/yearly_frequency_", date_hour, ".pdf"))
   
   # Apply Zipf's Law and plot
   zipfs_law_plot <- plot_zipfs_law(docs_words, title="Ley de Zipf", xlab="Rango", ylab="Frecuencia de Término")
