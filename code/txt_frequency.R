@@ -29,6 +29,15 @@ analyze_frequency <- function(date_hour) {
   
   # Join both
   docs_words <- left_join(docs_words, total_words, by = "document")
+
+  # Top 15 of word
+  top_words_by_doc <- docs_words %>%
+    group_by(document) %>%
+    top_n(15, wt = n) %>%
+    ungroup() = reorder(word, n)
+
+  # Plot Top 15 of word
+  top_15_plot <- plot_top_15(words15, title="Top 15 Most Frequent Words by Document", xlab="Words", ylab ="Frequency")
   
   # Plot term frequency distribution
   term_frequency_plot <- plot_term_frequency(docs_words, title="Term frequency distribution", xlab="Term frequency n/total", ylab="Count")
