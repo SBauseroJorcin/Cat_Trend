@@ -45,7 +45,7 @@ analyze_frequency <- function(date_hour) {
   save_plot_to_pdf(term_frequency_plot, paste0("output/frequency/term_frequency_", date_hour, ".pdf"))
   
   # Apply Zipf's Law and plot
-  zipfs_law_plot <- plot_zipfs_law(docs_words, title="Zipf’s law", xlab="Rank", ylab="Term frequency n/total")
+  zipfs_law_plot <- plot_zipfs_law(docs_words, title="Zipfs law", xlab="Rank", ylab="Term frequency n/total")
   save_plot_to_pdf(zipfs_law_plot, paste0("output/frequency/zipfs_law_", date_hour, ".pdf"))
   
   # Calculate TF-IDF and plot
