@@ -32,22 +32,6 @@ data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## 
 # Removed tag
 data_table$document <- gsub("\\.[^.]+$", "", data_table$document)
 
-# IF is numeric, is numeric, else is character, is character add conditional!
-# infoText <- if (is.numeric(data_table$date[1])) {
-#   tibble(
-#     document = character(),
-#     date = numeric(),
-#     paragraph = numeric(),
-#     text = character()
-#   )
-# } else {
-#   tibble(
-#     document = character(),
-#     date = character(),
-#     paragraph = numeric(),
-#     text = character()
-#   )
-# }
 infoText <- if (is.numeric(data_table$date[1])) {
   tibble(
     document = character(),
