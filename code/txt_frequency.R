@@ -13,7 +13,7 @@ analyze_frequency <- function(date_hour) {
   data_words <- read.table(file_name, sep = "\t", header = TRUE)
 
   # Inform the user about creating the output directory
-  cat("Creating output directory if it doesn't exist...\n")
+  cat("🔨 Creating output directory if it doesn't exist...\n")
 
   # Save the result to a file
   freq_dir <- "output/frequency"
