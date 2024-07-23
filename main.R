@@ -3,7 +3,7 @@
 # Load functions from functions.R
 source("code/init_utilitis.R")
 source("code/get_time_v1.R")
-source("code/txt_analysis_v1.R")
+source("code/txt_ngram_to_tidy.R")
 source("code/txt_frequency.R")
 
 # Get command line arguments
