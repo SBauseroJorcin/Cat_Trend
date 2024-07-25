@@ -1,7 +1,6 @@
 #!/usr/bin/env Rscript
 
-
-# Función para graficar la distribución de frecuencia de términos
+# Function to plot the frequency distribution of terms
 plot_term_frequency <- function(docs_words, title="Distribución de Frecuencia de Términos", xlab="Frecuencia de Términos", ylab="Conteo") {
   ggplot(data = docs_words, aes(n/total, fill = document)) +
     geom_histogram(show.legend = FALSE) +
@@ -12,7 +11,7 @@ plot_term_frequency <- function(docs_words, title="Distribución de Frecuencia d
     theme_minimal()
 }
 
-# Función para aplicar la Ley de Zipf y graficar
+# Function to apply Zipf's Law and graph
 plot_zipfs_law <- function(docs_words, title="Ley de Zipf", xlab="Rango", ylab="Frecuencia de Término") {
   freq_by_rank <- docs_words %>% 
     group_by(document) %>% 
@@ -28,7 +27,7 @@ plot_zipfs_law <- function(docs_words, title="Ley de Zipf", xlab="Rango", ylab="
     theme_minimal()
 }
 
-# Función para graficar TF-IDF
+# Function to graph TF-IDF
 plot_tf_idf <- function(docs_words, title="Top 10 Palabras por TF-IDF", xlab=NULL, ylab="tf-idf") {
   docs_words %>%
     select(-total) %>%
@@ -58,7 +57,7 @@ plot_top_15 <- function(docs_words, title="Top 15 Palabras Más Frecuentes por D
     coord_flip()
 }
 
-# Función para guardar un gráfico en PDF con tamaños fijos
+# Feature to save a chart to PDF with fixed sizes
 save_plot_to_pdf <- function(plot, filename, width = 8, height = 6) {
   ggsave(filename, plot = plot, width = width, height = height, limitsize = FALSE)
 }
