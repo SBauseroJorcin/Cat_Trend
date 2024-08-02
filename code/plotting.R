@@ -57,6 +57,8 @@ plot_top_10 <- function(docs_words, title="Top 10 Palabras Más Frecuentes por D
     coord_flip()
 }
 
+#NEED NEW PLOT. PLOTTING BARPLOT N OF YEAR 
+
 # Feature to save a chart to PDF with fixed sizes
 save_plot_to_pdf <- function(plot, filename, width = 8, height = 6) {
   ggsave(filename, plot = plot, width = width, height = height, limitsize = FALSE)
