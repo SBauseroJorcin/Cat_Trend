@@ -58,28 +58,7 @@ plot_top_10 <- function(docs_words, title="Top 10 Most Frequent Words per Docume
 }
 
 #NEED NEW PLOT. PLOTTING BARPLOT N OF YEAR 
-plot_term_frequency_by_year <- function(docs_words, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
-  
-  # Convertir la columna 'date' a tipo Date
-  docs_words$date <- dmy(docs_words$date)
-  
-  # Extraer el año de la columna 'date'
-  docs_words$year <- year(docs_words$date)
-  
-  # Sumarizar el total de palabras por año y por documento
-  yearly_word_count <- docs_words %>%
-    group_by(document, year) %>%
-    summarize(total_word_count = sum(word_count), .groups = 'drop')
-  
-  # Crear el plot
-  ggplot(data = yearly_word_count, aes(x = year, y = total_word_count, fill = document)) +
-    geom_col(show.legend = FALSE) +
-    facet_wrap(~document, ncol = 3, scales = "free_y") +
-    ggtitle(title) +
-    xlab(xlab) +
-    ylab(ylab) +
-    theme_minimal()
-}
+
 
 # Feature to save a chart to PDF with fixed sizes
 save_plot_to_pdf <- function(plot, filename, width = 8, height = 6) {
