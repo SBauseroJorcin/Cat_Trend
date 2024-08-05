@@ -12,7 +12,7 @@ plot_term_frequency <- function(docs_words, title="Term Frequency Distribution",
 }
 
 # Function to apply Zipf's Law and graph
-plot_zipfs_law <- function(docs_words, title="Ley de Zipf", xlab="Rango", ylab="Frecuencia de Término") {
+plot_zipfs_law <- function(docs_words, title="Zipf's Law", xlab="Range", ylab="Term Frequency") {
   freq_by_rank <- docs_words %>% 
     group_by(document) %>% 
     mutate(rank = row_number(), frecuencia_de_termino = n/total)
@@ -28,7 +28,7 @@ plot_zipfs_law <- function(docs_words, title="Ley de Zipf", xlab="Rango", ylab="
 }
 
 # Function to graph TF-IDF
-plot_tf_idf <- function(docs_words, title="Top 10 Palabras por TF-IDF", xlab=NULL, ylab="tf-idf") {
+plot_tf_idf <- function(docs_words, title="Top 10 Words by TF-IDF", xlab=NULL, ylab="tf-idf") {
   docs_words %>%
     select(-total) %>%
     arrange(desc(tf_idf)) %>%
@@ -45,7 +45,7 @@ plot_tf_idf <- function(docs_words, title="Top 10 Palabras por TF-IDF", xlab=NUL
     theme_minimal()
 }
 
-plot_top_10 <- function(docs_words, title="Top 10 Palabras Más Frecuentes por Documento", xlab=NULL, ylab="Número de Palabras") {
+plot_top_10 <- function(docs_words, title="Top 10 Most Frequent Words per Document", xlab=NULL, ylab="Number of words") {
   ggplot(docs_words, aes(x = reorder_within(word, n, document), y = n, fill = document)) +
     geom_bar(stat = "identity") +
     scale_x_reordered() +
@@ -58,7 +58,7 @@ plot_top_10 <- function(docs_words, title="Top 10 Palabras Más Frecuentes por D
 }
 
 #NEED NEW PLOT. PLOTTING BARPLOT N OF YEAR 
-plot_term_frequency_by_year <- function(docs_words, title="Distribución de Frecuencia de Términos por Año", xlab="Año", ylab="Total de Palabras") {
+plot_term_frequency_by_year <- function(docs_words, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
   
   # Convertir la columna 'date' a tipo Date
   docs_words$date <- dmy(docs_words$date)
