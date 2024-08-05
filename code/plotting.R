@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # Function to plot the frequency distribution of terms
-plot_term_frequency <- function(docs_words, title="Distribución de Frecuencia de Términos", xlab="Frecuencia de Términos", ylab="Conteo") {
+plot_term_frequency <- function(docs_words, title="Term Frequency Distribution", xlab="Terms Frequency", ylab="Count") {
   ggplot(data = docs_words, aes(n/total, fill = document)) +
     geom_histogram(show.legend = FALSE) +
     facet_wrap(~document, ncol = 3, scales = "free_y") +
