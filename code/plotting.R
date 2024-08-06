@@ -57,26 +57,26 @@ plot_top_10 <- function(docs_words, title="Top 10 Most Frequent Words per Docume
     coord_flip()
 }
 
-# # Función para extraer el año de la columna date
-# extract_year <- function(df) {
-#   df %>%
-#     mutate(year = year(dmy(date)))
-# }
+# Función para extraer el año de la columna date
+extract_year <- function(df) {
+  df %>%
+    mutate(year = year(dmy(date)))
+}
 
-# # Función para graficar el total de palabras por año
-# plot_words_per_year <- function(df, title = "Total de Palabras por Año", xlab = "Año", ylab = "Total de Palabras") {
-#   words_per_year <- df %>%
-#     extract_year() %>%
-#     group_by(year) %>%
-#     summarise(total_words = n()) # n() cuenta el número de filas por grupo
+# Función para graficar el total de palabras por año
+plot_words_per_year <- function(df, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
+  words_per_year <- df %>%
+    extract_year() %>%
+    group_by(year) %>%
+    summarise(total_words = n()) # n() cuenta el número de filas por grupo
   
-#   ggplot(words_per_year, aes(x = factor(year), y = total_words)) +
-#     geom_bar(stat = "identity", fill = "skyblue") +
-#     ggtitle(title) +
-#     xlab(xlab) +
-#     ylab(ylab) +
-#     theme_minimal()
-# }
+  ggplot(words_per_year, aes(year, total_words)) +
+    geom_bar(stat = "identity", fill = "skyblue") +
+    ggtitle(title) +
+    xlab(xlab) +
+    ylab(ylab) +
+    theme_minimal()
+}
 
 
 # Feature to save a chart to PDF with fixed sizes
