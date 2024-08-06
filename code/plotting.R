@@ -63,7 +63,7 @@ extract_year <- function(df) {
     mutate(year = year(dmy(date)))
 }
 
-# Función para graficar el total de palabras por año
+# Function to graph total words per year
 plot_words_per_year <- function(df, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
   words_per_year <- df %>%
     extract_year() %>%
