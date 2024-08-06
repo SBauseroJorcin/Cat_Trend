@@ -58,7 +58,7 @@ analyze_frequency <- function(date_hour) {
   save_plot_to_pdf(tf_idf_plot, paste0("output/frequency/tf_idf_", date_hour, ".pdf"))
 
   # # Plot word by year
-  # word_per_year_plot <- plot_words_per_year(docs_words, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words")
+  # word_per_year_plot <- plot_words_per_year(data_words, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words")
   # save_plot_to_pdf(year_frequency_plot, paste0("output/frequency/total_word_by_year", date_hour, ".pdf"))
 
 }
