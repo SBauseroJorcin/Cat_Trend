@@ -57,8 +57,19 @@ plot_top_10 <- function(docs_words, title="Top 10 Most Frequent Words per Docume
     coord_flip()
 }
 
-#NEED NEW PLOT. PLOTTING BARPLOT N OF YEAR 
-
+# # New plot function: total number of words per year
+# plot_words_per_year <- function(docs_words, title="Total Number of Words per Year", xlab="Year", ylab="Total Number of Words") {
+#   words_per_year <- docs_words %>%
+#     group_by(year) %>%
+#     summarise(total_words = sum(n))
+  
+#   ggplot(words_per_year, aes(x = year, y = total_words)) +
+#     geom_bar(stat = "identity", fill = "steelblue") +
+#     ggtitle(title) +
+#     xlab(xlab) +
+#     ylab(ylab) +
+#     theme_minimal()
+# }
 
 # Feature to save a chart to PDF with fixed sizes
 save_plot_to_pdf <- function(plot, filename, width = 8, height = 6) {
