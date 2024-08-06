@@ -68,7 +68,7 @@ plot_words_per_year <- function(df, title="Frequency Distribution of Terms by Ye
   words_per_year <- df %>%
     extract_year() %>%
     group_by(year) %>%
-    summarise(total_words = n()) # n() cuenta el número de filas por grupo
+    summarise(total_words = n())
   
   ggplot(words_per_year, aes(year, total_words)) +
     geom_bar(stat = "identity", fill = "skyblue") +
