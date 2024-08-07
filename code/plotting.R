@@ -78,6 +78,22 @@ plot_words_per_year <- function(df, title="Frequency Distribution of Terms by Ye
     theme_minimal()
 }
 
+# Function to graph total words per year and per year
+plot_words_per_year_and_doc <- function(df, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
+  words_per_year <- df %>%
+    extract_year() %>%
+    group_by(document, year) %>%
+    summarise(total_words = n(), .groups = 'drop')
+  
+  ggplot(words_per_year, aes(year, total_words)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~ document, ncol = 3, scales = "free_y") +
+    ggtitle(title) +
+    xlab(xlab) +
+    ylab(ylab) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    theme_minimal()
+}
 
 # Feature to save a chart to PDF with fixed sizes
 save_plot_to_pdf <- function(plot, filename, width = 8, height = 6) {
