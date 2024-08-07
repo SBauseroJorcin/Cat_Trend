@@ -80,12 +80,12 @@ plot_words_per_year <- function(df, title="Frequency Distribution of Terms by Ye
 
 # Function to graph total words per year and per year
 plot_words_per_year_and_doc <- function(df, title="Frequency Distribution of Terms by Year", xlab="Year", ylab="Total Words") {
-  words_per_year <- df %>%
+  words_per_year_and_doc <- df %>%
     extract_year() %>%
     group_by(document, year) %>%
     summarise(total_words = n(), .groups = 'drop')
   
-  ggplot(words_per_year, aes(year, total_words)) +
+  ggplot(words_per_year_and_doc, aes(year, total_words)) +
     geom_bar(stat = "identity") +
     facet_wrap(~ document, ncol = 3, scales = "free_y") +
     ggtitle(title) +
