@@ -85,14 +85,14 @@ plot_words_per_year_and_doc <- function(df, title="Term Frequency Distribution b
     group_by(document, year) %>%
     summarise(total_words = n(), .groups = 'drop')
   
-  ggplot(words_per_year_and_doc, aes(year, total_words)) +
+  ggplot(words_per_year_and_doc, aes(x = factor(year), y = total_words, fill = document)) +
     geom_bar(stat = "identity") +
     facet_wrap(~ document, ncol = 3, scales = "free_y") +
     ggtitle(title) +
     xlab(xlab) +
     ylab(ylab) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    theme_minimal()
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
 # Feature to save a chart to PDF with fixed sizes
