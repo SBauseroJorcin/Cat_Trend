@@ -87,7 +87,7 @@ plot_words_per_year_and_doc <- function(df, title="Term Frequency Distribution b
   
   ggplot(words_per_year_and_doc, aes(x = factor(year), y = total_words, fill = document)) +
     geom_bar(stat = "identity") +
-    facet_wrap(~ document, ncol = 3, scales = "free_y") +
+    facet_wrap(~ document, ncol = 3, scales = "free") +
     ggtitle(title) +
     xlab(xlab) +
     ylab(ylab) +
