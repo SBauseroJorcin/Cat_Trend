@@ -89,7 +89,7 @@ generate_ngrams <- function(infoText, n) {
   tokens <- infoText %>%
     unnest_tokens(word, text, token = "ngrams", n = n) %>%
     separate(word, into = paste0("word", 1:n), sep = " ") %>%
-    filter(across(starts_with("word"), ~ !grepl("\\d+", .) & !(. %in% empty$word))) %>%
+    filter(across(starts_with("word"), ~ !grepl("\\d+", .) & !(tolower(.) %in% stopwords_list))) %>%
     unite(word, starts_with("word"), sep = " ")
   
   return(tokens)
