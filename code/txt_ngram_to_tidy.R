@@ -105,7 +105,7 @@ if (ngram_number == "4") {
 } else if (ngram_number == "1" || ngram_number == "") {
   infoText_token <- infoText %>%
     unnest_tokens(word, text) %>%
-    filter(!grepl("\\d+", word) & !word %in% empty$word)
+    filter(!grepl("\\d+", word) & !(tolower(word) %in% stopwords_list))
 } else {
   stop("Invalid ngram value. Use 1, 2, or 3.")
 }
