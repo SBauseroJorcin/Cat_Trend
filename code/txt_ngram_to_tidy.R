@@ -77,9 +77,9 @@ infoText <- infoText %>%
 
 # Read stop words according to the specified language
 if (tolower(language) == "sp") {
-  empty <- read_tsv("datos/vacias.txt", col_names = "word")
+  stopwords_list <- stopwords(language = "es", source = "stopwords-iso")
 } else if (tolower(language) == "en") {
-  empty <- stop_words %>% select(word)
+  stopwords_list <- stopwords(language = "en", source = "stopwords-iso")
 } else {
   stop("Invalid language argument. Use 'SP' or 'EN'.")
 }
