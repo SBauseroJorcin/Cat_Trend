@@ -54,7 +54,7 @@ Ejemplo:
 cat("🔄 Start of processing________________________________________________________\n")
 
 cat("📖 Installing and loading libraries...\n")
-required_packages <- c("stringr", "lubridate", "tidytext", "tidyverse", "ggplot2")
+required_packages <- c("stringr", "lubridate", "tidytext", "stopwords", "tidyverse", "ggplot2")
 manage_packages(required_packages)
 
 # Fecha y hora actual
