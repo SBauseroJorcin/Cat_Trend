@@ -8,10 +8,20 @@ remove_accents <- function(texto) {
 }
 
 # Function to remove numbers from the start and end of the text
-remove_numbers_from_edges <- function(text) {
-  text <- gsub("^\\d+", "", text)  # Remove numbers at the start
-  text <- gsub("\\d+$", "", text)  # Remove numbers at the end
-  return(text)
+# remove_numbers_from_edges <- function(text) {
+#   text <- gsub("^\\d+", "", text)  # Remove numbers at the start
+#   text <- gsub("\\d+$", "", text)  # Remove numbers at the end
+#   return(text)
+# }
+normalize_document_name <- function(name) {
+  name <- tolower(name)
+  name <- tools::file_path_sans_ext(name)               # Remove extension
+  name <- gsub("[^a-z]", " ", name)                     # Replace non-letters with space
+  name <- unlist(strsplit(name, "\\s+"))                # Split by spaces
+  name <- name[nchar(name) > 2]                         # Keep words longer than 2 letters
+  if (length(name) == 0) return(NA)
+  name <- name[which.max(nchar(name))]                  # Keep longest word
+  return(name)
 }
 
 file_name <- paste0("output/data_table_", date_hour, ".txt")
@@ -24,10 +34,12 @@ data_table <- read.table(file_name, sep = "\t", header = FALSE, col.names = c("d
 data_table$date <- gsub("/", "-", data_table$date)
 
 # Basename
+# data_table$document <- basename(data_table$document)
+# data_table$origin_document <- data_table$document
+# data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## TEST
 data_table$document <- basename(data_table$document)
 data_table$origin_document <- data_table$document
-data_table$document <- sapply(data_table$document, remove_numbers_from_edges)## TEST
-
+data_table$document <- sapply(data_table$document, normalize_document_name)
 
 # Removed tag
 data_table$document <- gsub("\\.[^.]+$", "", data_table$document)
