@@ -72,6 +72,13 @@ for (i in seq_along(data_table$origin_document)) {
   
   # Calculate the total words in the document
 #  total_words <- sum(word_counts, na.rm = TRUE)
+  if (length(speech) == 0) {
+    message("⚠️ Archivo vacío: ", file_path)
+  }
+  
+  if (any(is.na(speech))) {
+    message("⚠️ Línea NA encontrada en: ", file_path)
+  }
   
   temporal <- tibble(document = data_table$document[i],
                      date = data_table$date[i],
