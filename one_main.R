@@ -338,3 +338,77 @@ ggsave(paste0("output/frequency/words_per_year_doc_", date_hour, ".pdf"), p6, wi
 
 cat("\n🎉 ¡Análisis completado con éxito!\n")
 cat("📁 Los resultados se guardaron en la carpeta 'output/'\n")
+
+####  LÍNEA DEL TIEMPO
+
+data_linea <- data_table %>%
+  mutate(
+    document = str_to_lower(str_trim(document)),
+    date = lubridate::dmy(date)
+  ) %>%
+  group_by(document, date) %>%
+  slice(1) %>%  # solo la primera fila de cada grupo
+  ungroup()
+
+
+# Diccionario de nombres corregidos
+nombres_corregidos <- c(
+  "oceano" = "Zona Oceánica",
+  "lagunas" = "Lagunas Costeras",
+  "bellaunion" = "Bella Unión",
+  "merin" = "Merín",
+  "montevideo" = "Montevideo",
+  "sanjose" = "San José",
+  "villasoriano" = "Villa Soriano",
+  "salto" = "Salto",
+  "andresito" = "Andresito",
+  "costa" = "La Costa",
+  "piria" = "Piriápolis",
+  "pde" = "Punta del Este",
+  "lcbc" = "La Coronilla-Barra del Chuy",
+  "bonete" = "Rincón del Bonete"
+)
+
+# Contar la cantidad de sesiones por consejo
+conteo_sesiones <- data_linea %>%
+  group_by(document) %>%
+  summarize(n_sesiones = n())
+
+# Obtener el primer y último registro de cada consejo
+rango_fechas <- data_linea %>%
+  group_by(document) %>%
+  summarize(
+    inicio = min(date),
+    fin = max(date)
+  ) %>%
+  left_join(conteo_sesiones, by = "document") %>%
+  arrange(desc(n_sesiones)) %>%
+  mutate(document = factor(document, levels = document))  # Mantener el orden
+
+# Reemplazar nombres en la columna 'consejo'
+rango_fechas$document <- recode(rango_fechas$document, !!!nombres_corregidos)
+data_linea$document <- recode(data_linea$document, !!!nombres_corregidos)
+
+# Crear el gráfico con líneas en los ejes
+ggplot() +
+  # Barras horizontales desde la primera hasta la última sesión
+  geom_segment(data = rango_fechas, 
+               aes(x = inicio, xend = fin, y = document, yend = document),
+               size = 10, color = "paleturquoise3") +
+  # Puntos para cada sesión individual
+  geom_point(data = data_linea, 
+             aes(x = date, y = document), 
+             color = "gray18", size = 2, alpha = 0.7) +
+  # Configurar el eje X para mostrar todos los años
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  # Agregar líneas de referencia en los ejes X e Y
+  theme_light() +
+  theme(
+    panel.grid.major.x = element_line(color = "gray98"),
+    panel.grid.major.y = element_line(color = "gray98"),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(title = "",
+       x = "",
+       y = "Fishery Council")
