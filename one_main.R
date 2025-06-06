@@ -170,9 +170,9 @@ infoText <- infoText %>%
 
 # Cargar stopwords según idioma
 if (tolower(config$language) == "sp") {
-  stopwords_list <- stopwords(language = "es", source = "stopwords-iso")
+  stopwords_list <- stopwords(language = "es", source = "stopwords-iso") # nltk
 } else if (tolower(config$language) == "en") {
-  stopwords_list <- stopwords(language = "en", source = "stopwords-iso")
+  stopwords_list <- stopwords(language = "en", source = "stopwords-iso") # nltk
 } else {
   stop("Idioma no válido. Usar 'SP' o 'EN'")
 }
