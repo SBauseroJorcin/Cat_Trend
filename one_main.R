@@ -233,7 +233,7 @@ cat("\n📈 Generando visualizaciones...\n")
 # Gráfico 1: Top 10 palabras por documento
 top_words_by_doc <- docs_words %>%
   group_by(document) %>%
-  top_n(10, wt = n) %>%
+  slice_max(order_by = n, n = 10, with_ties = FALSE) %>%
   ungroup()
 
 p1 <- ggplot(top_words_by_doc, aes(x = reorder_within(word, n, document), y = n, fill = document)) +
