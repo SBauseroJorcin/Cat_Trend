@@ -74,12 +74,24 @@ find_date_in_file <- function(file_path) {
 }
 
 # Función para generar n-gramas
+# generate_ngrams <- function(infoText, n, stopwords_list) {
+#   tokens <- infoText %>%
+#     unnest_tokens(word, text, token = "ngrams", n = n) %>%
+#     separate(word, into = paste0("word", 1:n), sep = " ") %>%
+#     filter(across(starts_with("word"), ~ !grepl("\\d+", .) & !(tolower(.) %in% stopwords_list))) %>%
+#     unite(word, starts_with("word"), sep = " ")
+  
+#   return(tokens)
+# }
+
 generate_ngrams <- function(infoText, n, stopwords_list) {
   tokens <- infoText %>%
     unnest_tokens(word, text, token = "ngrams", n = n) %>%
-    separate(word, into = paste0("word", 1:n), sep = " ") %>%
-    filter(across(starts_with("word"), ~ !grepl("\\d+", .) & !(tolower(.) %in% stopwords_list))) %>%
-    unite(word, starts_with("word"), sep = " ")
+    separate(word, into = paste0("word", 1:n), sep = " ", remove = TRUE) %>%
+    filter(across(paste0("word", 1:n), ~ !is.na(.) & . != "")) %>%
+    filter(across(paste0("word", 1:n), ~ !grepl("\\d+", .) & !(tolower(.) %in% stopwords_list))) %>%
+    unite(word, starts_with("word"), sep = " ", remove = TRUE) %>%
+    filter(!is.na(word), str_trim(word) != "")
   
   return(tokens)
 }
