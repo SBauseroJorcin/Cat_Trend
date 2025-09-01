@@ -14,7 +14,7 @@ df_actas <- df_actas %>%
 
 df_actas$sitio <- recode(df_actas$sitio, !!!nombres_corregidos)
 
-# Conteo de sesiones
+# session count
 conteo_sesiones <- df_actas %>%
   group_by(sitio) %>%
   summarize(n_sesiones = n())
@@ -30,12 +30,12 @@ rango_fechas <- df_actas %>%
   arrange(desc(n_sesiones)) %>%
   mutate(sitio = factor(sitio, levels = sitio))
 
-# Secuencia de años
+# sequence of year
 anios <- seq(from = year(min(df_actas$fecha)),
              to   = year(max(df_actas$fecha)), by = 1)
 breaks_centrados <- as.Date(paste0(anios, "-07-01"))
 
-# Gráfico
+# Plot
 ggplot() +
   geom_segment(
     data = rango_fechas,
