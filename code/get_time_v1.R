@@ -2,6 +2,7 @@
 
 # Load functions from functions.R
 source("timeline_plot.R")
+source("plotting.R")
 
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
