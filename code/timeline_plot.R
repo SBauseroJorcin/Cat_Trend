@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
 # Function to plot the time line documents
-plot_timeline <- function(docs_words, title="Term Frequency Distribution", xlab="Terms Frequency", ylab="Count") {
+plot_timeline <- function(date_table, title="Term Frequency Distribution", xlab="Terms Frequency", ylab="Count") {
 
-df_actas <- read.delim("output/data_table_31-08-2025_12:00.txt", 
+df_actas <- read.delim(date_table, 
                        header = FALSE, sep = "\t", stringsAsFactors = FALSE)
 
 colnames(df_actas) <- c("file", "dates")
