@@ -8,9 +8,9 @@ colnames(df_actas) <- c("file", "fecha")
 df_actas <- df_actas %>%
   mutate(
     sitio = tools::file_path_sans_ext(basename(file)),
-    fecha = dmy(fecha)   # convertir fechas
+    fecha = dmy(fecha)   # convert dates
   ) %>%
-  filter(!is.na(fecha))  # eliminar los "Date not found"
+  filter(!is.na(fecha))  # remove "Date not found"
 
 df_actas$sitio <- recode(df_actas$sitio, !!!nombres_corregidos)
 
@@ -19,7 +19,7 @@ conteo_sesiones <- df_actas %>%
   group_by(sitio) %>%
   summarize(n_sesiones = n())
 
-# Rango de fechas
+# Date range
 rango_fechas <- df_actas %>%
   group_by(sitio) %>%
   summarize(
