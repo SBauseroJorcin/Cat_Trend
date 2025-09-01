@@ -3,7 +3,7 @@
 df_actas <- read.delim("output/data_table_31-08-2025_12:00.txt", 
                        header = FALSE, sep = "\t", stringsAsFactors = FALSE)
 
-colnames(df_actas) <- c("file", "fecha")
+colnames(df_actas) <- c("file", "dates")
 
 df_actas <- df_actas %>%
   mutate(
