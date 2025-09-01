@@ -93,3 +93,19 @@ validate_arguments <- function(args) {
 #   }
 # }
 
+manage_packages <- function(required_packages) {
+  # Always set a default CRAN repo for portability
+  repos <- getOption("repos")
+  if (is.null(repos) || repos["CRAN"] == "@CRAN@") {
+    options(repos = c(CRAN = "https://cloud.r-project.org"))
+  }
+  
+  for (pkg in required_packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      cat(paste0("📦 Installing package: ", pkg, "...\n"))
+      install.packages(pkg, dependencies = TRUE)
+    }
+    suppressPackageStartupMessages(library(pkg, character.only = TRUE))
+    cat(paste0("✅ Loaded package: ", pkg, " (v", as.character(packageVersion(pkg)), ")\n"))
+  }
+}
