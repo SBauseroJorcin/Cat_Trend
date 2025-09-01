@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 # Function to plot the time line documents
-plot_timeline <- function(date_table, title="Term Frequency Distribution", xlab="Terms Frequency", ylab="Count") {
+plot_timeline <- function(date_table, title="Document per site", xlab="", ylab="Site") {
 
 df_actas <- read.delim(date_table, 
                        header = FALSE, sep = "\t", stringsAsFactors = FALSE)
@@ -66,8 +66,8 @@ ggplot() +
     axis.text.x = element_text(size = 15, angle = 45, hjust = 1)
   ) +
   labs(
-    title = "Sesiones por Consejo Pesquero",
+    title = title,
     x = "",
-    y = "Fishery Council"
+    y = ylab
   )
 }
