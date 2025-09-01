@@ -84,12 +84,12 @@ validate_arguments <- function(args) {
 }
 
 ## NEED SHOW INFORMATION TO USER OF LIBRARY
-manage_packages <- function(required_packages) {
-  for (pkg in required_packages) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-      install.packages(pkg)
-    }
-    library(pkg, character.only = TRUE)
-  }
-}
+# manage_packages <- function(required_packages) {
+#   for (pkg in required_packages) {
+#     if (!requireNamespace(pkg, quietly = TRUE)) {
+#       install.packages(pkg)
+#     }
+#     library(pkg, character.only = TRUE)
+#   }
+# }
 
