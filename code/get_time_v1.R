@@ -90,7 +90,6 @@ write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.na
 
 # Plot word by year
 timeline_plot <- plot_timeline(tabla_datos, , title="Document per site", xlab="", ylab="Site")
-# save_plot_to_pdf(word_per_year_plot, paste0("output/frequency/total_word_by_year", date_hour, ".pdf"))
-
+save_plot_to_pdf(timeline_plot, paste0("output/timeline_", date_hour, ".pdf"))
 
 }
