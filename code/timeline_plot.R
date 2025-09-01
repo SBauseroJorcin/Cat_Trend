@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+# Function to plot the time line documents
+plot_timeline <- function(docs_words, title="Term Frequency Distribution", xlab="Terms Frequency", ylab="Count") {
+
 df_actas <- read.delim("output/data_table_31-08-2025_12:00.txt", 
                        header = FALSE, sep = "\t", stringsAsFactors = FALSE)
 
@@ -67,3 +70,4 @@ ggplot() +
     x = "",
     y = "Fishery Council"
   )
+}
