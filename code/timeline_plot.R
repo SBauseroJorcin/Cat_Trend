@@ -11,9 +11,9 @@ colnames(df_actas) <- c("file", "dates")
 df_actas <- df_actas %>%
   mutate(
     sitio = tools::file_path_sans_ext(basename(file)),
-    fecha = dmy(fecha)   # convert dates
+    dates = dmy(dates)   # convert dates
   ) %>%
-  filter(!is.na(fecha))  # remove "Date not found"
+  filter(!is.na(dates))  # remove "Date not found"
 
 df_actas$sitio <- recode(df_actas$sitio, !!!nombres_corregidos)
 
@@ -23,32 +23,32 @@ conteo_sesiones <- df_actas %>%
   summarize(n_sesiones = n())
 
 # Date range
-rango_fechas <- df_actas %>%
+rango_dates <- df_actas %>%
   group_by(sitio) %>%
   summarize(
-    inicio = min(fecha),
-    fin    = max(fecha)
+    inicio = min(dates),
+    fin    = max(dates)
   ) %>%
   left_join(conteo_sesiones, by = "sitio") %>%
   arrange(desc(n_sesiones)) %>%
   mutate(sitio = factor(sitio, levels = sitio))
 
 # sequence of year
-anios <- seq(from = year(min(df_actas$fecha)),
-             to   = year(max(df_actas$fecha)), by = 1)
+anios <- seq(from = year(min(df_actas$dates)),
+             to   = year(max(df_actas$dates)), by = 1)
 breaks_centrados <- as.Date(paste0(anios, "-07-01"))
 
 # Plot
 ggplot() +
   geom_segment(
-    data = rango_fechas,
+    data = rango_dates,
     aes(x = inicio, xend = fin, y = sitio, yend = sitio),
     size = 10,
     color = "paleturquoise3"
   ) +
   geom_point(
     data = df_actas,
-    aes(x = fecha, y = sitio),
+    aes(x = dates, y = sitio),
     color = "gray1",
     size = 2.5,
     alpha = 0.7
