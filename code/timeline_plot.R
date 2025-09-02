@@ -71,6 +71,12 @@ ggplot() +
   labs(
     title = title,
     x = "",
-    y = ylab
-  )
+    y = paste0(ylab, " (n sesiones)")) +
+  geom_text(
+    data = conteo_sesiones,
+    aes(x = max(df_actas$dates) + 200, y = site,
+        label = n_sesiones),
+    hjust = 0,
+    size = 5
+  ) 
 }
