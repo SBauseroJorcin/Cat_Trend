@@ -10,8 +10,13 @@ colnames(df_actas) <- c("file", "dates")
 
 df_actas <- df_actas %>%
   mutate(
-    sitio = tools::file_path_sans_ext(basename(file)),
-    dates = dmy(dates)   # convert dates
+    # sitio = tools::file_path_sans_ext(basename(file)),
+    # dates = dmy(dates)   # convert dates
+    sitio = basename(file),                           # me quedo solo con nombre del archivo
+    sitio = tools::file_path_sans_ext(sitio),         # saco extensión
+    sitio = tolower(sitio),                           # paso todo a minúscula
+    sitio = str_remove(sitio, "_[0-9].*$"),           # elimino fecha o numeración si existe después de "_"
+    dates = dmy(dates)                                # convierto fechas
   ) %>%
   filter(!is.na(dates))  # remove "Date not found"
 
