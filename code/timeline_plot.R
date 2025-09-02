@@ -10,33 +10,33 @@ colnames(df_actas) <- c("file", "dates")
 
 df_actas <- df_actas %>%
   mutate(
-    # sitio = tools::file_path_sans_ext(basename(file)),
+    # site = tools::file_path_sans_ext(basename(file)),
     # dates = dmy(dates)   # convert dates
-    sitio = basename(file),                           # me quedo solo con nombre del archivo
-    sitio = tools::file_path_sans_ext(sitio),         # saco extensión
-    sitio = tolower(sitio),                           # paso todo a minúscula
-    sitio = str_remove(sitio, "_[0-9].*$"),           # elimino fecha o numeración si existe después de "_"
+    site = basename(file),                           # me quedo solo con nombre del archivo
+    site = tools::file_path_sans_ext(site),         # saco extensión
+    site = tolower(site),                           # paso todo a minúscula
+    site = str_remove(site, "_[0-9].*$"),           # elimino fecha o numeración si existe después de "_"
     dates = dmy(dates)                                # convierto fechas
   ) %>%
   filter(!is.na(dates))  # remove "Date not found"
 
-df_actas$sitio <- recode(df_actas$sitio, !!!nombres_corregidos)
+df_actas$site <- recode(df_actas$site, !!!nombres_corregidos)
 
 # session count
 conteo_sesiones <- df_actas %>%
-  group_by(sitio) %>%
+  group_by(site) %>%
   summarize(n_sesiones = n())
 
 # Date range
 rango_dates <- df_actas %>%
-  group_by(sitio) %>%
+  group_by(site) %>%
   summarize(
     inicio = min(dates),
     fin    = max(dates)
   ) %>%
-  left_join(conteo_sesiones, by = "sitio") %>%
+  left_join(conteo_sesiones, by = "site") %>%
   arrange(desc(n_sesiones)) %>%
-  mutate(sitio = factor(sitio, levels = sitio))
+  mutate(site = factor(site, levels = site))
 
 # sequence of year
 anios <- seq(from = year(min(df_actas$dates)),
@@ -47,13 +47,13 @@ breaks_centrados <- as.Date(paste0(anios, "-07-01"))
 ggplot() +
   geom_segment(
     data = rango_dates,
-    aes(x = inicio, xend = fin, y = sitio, yend = sitio),
+    aes(x = inicio, xend = fin, y = site, yend = site),
     size = 10,
     color = "paleturquoise3"
   ) +
   geom_point(
     data = df_actas,
-    aes(x = dates, y = sitio),
+    aes(x = dates, y = site),
     color = "gray1",
     size = 2.5,
     alpha = 0.7
