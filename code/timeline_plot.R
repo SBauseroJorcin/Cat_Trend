@@ -20,8 +20,6 @@ df_actas <- df_actas %>%
   ) %>%
   filter(!is.na(dates))  # remove "Date not found"
 
-df_actas$site <- recode(df_actas$site, !!!nombres_corregidos)
-
 # session count
 conteo_sesiones <- df_actas %>%
   group_by(site) %>%
