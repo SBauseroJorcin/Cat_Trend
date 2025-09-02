@@ -12,11 +12,11 @@ df_actas <- df_actas %>%
   mutate(
     # site = tools::file_path_sans_ext(basename(file)),
     # dates = dmy(dates)   # convert dates
-    site = basename(file),                           # me quedo solo con nombre del archivo
-    site = tools::file_path_sans_ext(site),         # saco extensión
-    site = tolower(site),                           # paso todo a minúscula
-    site = str_remove(site, "_[0-9].*$"),           # elimino fecha o numeración si existe después de "_"
-    dates = dmy(dates)                                # convierto fechas
+    site = basename(file),                           # base name
+    site = tools::file_path_sans_ext(site),         # remove extension file
+    site = tolower(site),                           # change words to lower
+    site = str_remove(site, "_[0-9].*$"),           # removes date or numbering if it exists after "_"
+    dates = dmy(dates)                                # convert dates
   ) %>%
   filter(!is.na(dates))  # remove "Date not found"
 
