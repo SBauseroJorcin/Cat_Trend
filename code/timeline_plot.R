@@ -10,8 +10,6 @@ colnames(df_actas) <- c("file", "dates")
 
 df_actas <- df_actas %>%
   mutate(
-    # site = tools::file_path_sans_ext(basename(file)),
-    # dates = dmy(dates)   # convert dates
     site = basename(file),                           # base name
     site = tools::file_path_sans_ext(site),         # remove extension file
     site = tolower(site),                           # change words to lower
