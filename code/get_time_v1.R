@@ -46,6 +46,7 @@ lines <- iconv(lines, from = "latin1", to = "UTF-8", sub = "�")
     date_in_line_en <- str_extract(line_cleaned, date_pattern_en)
     
     if (!is.na(date_in_line_es)) {
+      date_in_line_es <- normalize_months(date_in_line_es)
       parsed_date <- dmy(date_in_line_es, quiet = TRUE)
       if (!is.na(parsed_date)) {
         date_found <- format(parsed_date, "%d/%m/%Y")
