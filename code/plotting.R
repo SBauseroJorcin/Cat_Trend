@@ -62,7 +62,7 @@ plot_top_global <- function(docs_words, title="Top 10 Most Frequent Words (All D
     group_by(word) %>%
     summarise(total_n = sum(n), .groups = 'drop') %>%
     arrange(desc(total_n)) %>%
-    top_n(10, total_n)
+    top_n(30, total_n)
   
   ggplot(global_top, aes(x = reorder(word, total_n), y = total_n)) +
     geom_col(fill = "#0072B2") +
