@@ -1,8 +1,10 @@
 #!/usr/bin/env Rscript
 
 # Load functions from functions.R
-# source("timeline_plot.R")
-# source("plotting.R")
+timeline_script <- file.path("code", "timeline_plot.R")
+plotting_script <- file.path("code", "plotting.R")
+source(timeline_script)
+source(plotting_script)
 
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
