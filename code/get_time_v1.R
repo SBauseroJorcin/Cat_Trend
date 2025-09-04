@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript
 
 # Load functions from functions.R
-source("timeline_plot.R")
-source("plotting.R")
+# source("timeline_plot.R")
+# source("plotting.R")
 
 # Encapsulate program in a function
 main_get_time <- function(directory, date_hour) {
@@ -88,8 +88,8 @@ file_name <- file.path("output/", paste0("data_table_", date_hour, ".txt"))
 
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
-# Plot word by year
-timeline_plot <- plot_timeline(tabla_datos, , title="Document per site", xlab="", ylab="Site")
-save_plot_to_pdf(timeline_plot, paste0("output/timeline_", date_hour, ".pdf"))
+# # Plot word by year
+# timeline_plot <- plot_timeline(tabla_datos, , title="Document per site", xlab="", ylab="Site")
+# save_plot_to_pdf(timeline_plot, paste0("output/timeline_", date_hour, ".pdf"))
 
 }
