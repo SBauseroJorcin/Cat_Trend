@@ -43,9 +43,9 @@ analyze_frequency <- function(date_hour) {
   top_10_plot <- plot_top_10(top_words_by_doc, title="Top 10 Most Frequent Words by Document", xlab="Words", ylab ="Frequency")
   save_plot_to_pdf(top_10_plot, paste0("output/frequency/most_frequen_words", date_hour, ".pdf"))
 
-  plot_top_global
-  top_global_plot <- plot_top_globaltop_words_by_doc, title="Top 10 Most Frequent Words by Document", xlab="Words", ylab ="Frequency")
-  save_plot_to_pdf(top_10_plot, paste0("output/frequency/most_frequen_words", date_hour, ".pdf"))
+  # Plot global word
+  top_global_plot <- plot_top_global(data_words, title="Top 10 Most Frequent Words (All Documents)", xlab=NULL, ylab="Number of words")
+  save_plot_to_pdf(top_10_plot, paste0("output/frequency/global_most_frequen_words", date_hour, ".pdf"))
 
   # Plot term frequency distribution
   term_frequency_plot <- plot_term_frequency(docs_words, title="Term frequency distribution", xlab="Term frequency n/total", ylab="Count")
