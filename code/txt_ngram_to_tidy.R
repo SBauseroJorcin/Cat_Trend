@@ -129,6 +129,9 @@ if (ngram_number == "4") {
   stop("Invalid ngram value. Use 1, 2, or 3.")
 }
 
+infoText_token <- infoText_token %>%
+  filter(!is.na(word))  # remove NAs
+
 # Save the result to a file
 output_dir <- "output"
 if (!dir.exists(output_dir)) {
