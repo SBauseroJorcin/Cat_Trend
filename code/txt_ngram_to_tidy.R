@@ -138,7 +138,17 @@ if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
+# library(spacyr)
+# spacy_initialize(model = "es_core_news_sm") # o "en_core_web_sm"
+
+# parsed <- spacy_parse(infoText_token$text, entity = TRUE)
+# persons <- parsed[parsed$entity_type == "PERSON", ]
+# infoText_no_person <- infoText_token %>%
+#   filter(!word %in% persons$token)
+
 textWord <- file.path("output/", paste0("words_", date_hour, ".txt"))
+# textWord_noperson <- file.path("output/", paste0("words_no_person_", date_hour, ".txt"))
 write.table(infoText_token, file = textWord, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
+# write.table(infoText_no_person, file = textWord_noperson, row.names = FALSE, col.names = TRUE, sep = "\t", quote = FALSE)
 
 }
