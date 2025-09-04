@@ -57,6 +57,21 @@ plot_top_10 <- function(docs_words, title="Top 10 Most Frequent Words per Docume
     coord_flip()
 }
 
+plot_top_global <- function(docs_words, title="Top 10 Most Frequent Words (All Documents)", xlab=NULL, ylab="Number of words") {
+  global_top <- docs_words %>%
+    group_by(word) %>%
+    summarise(total_n = sum(n), .groups = 'drop') %>%
+    arrange(desc(total_n)) %>%
+    top_n(10, total_n)
+  
+  ggplot(global_top, aes(x = reorder(word, total_n), y = total_n)) +
+    geom_col(fill = "#0072B2") +
+    coord_flip() +
+    theme_minimal() +
+    ggtitle(title) +
+    labs(x = xlab, y = ylab)
+}
+
 # Función para extraer el año de la columna date
 extract_year <- function(df) {
   df %>%
