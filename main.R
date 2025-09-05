@@ -68,5 +68,10 @@ main_process_texts(directory, language, ngram_number, date_hour)
 cat("\n🧮 Performing analysis...\n\n")
 analyze_frequency(date_hour)
 
+if (!is.null(keywords_file)) {
+  cat("\n🧮 Performing category analysis...\n\n")
+  # analyze_frequency(date_hour)
+}
+
 cat("\n✅ Processing completed successfully.\n\n")
 
