@@ -98,9 +98,7 @@ file_name <- file.path("output/", paste0("data_table_", date_hour, ".txt"))
 
 write.table(tabla_datos, file = file_name, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
-# # Plot word by year
-# timeline_plot <- plot_timeline(tabla_datos, title="Document per site", xlab="", ylab="Site")
-# save_plot_to_pdf(timeline_plot, paste0("output/timeline_", date_hour, ".pdf"))
+# Plot word by year
 timeline_plot <- plot_timeline(file_name, title="Document per site", xlab="", ylab="Site") # these script need path not data frame!
 save_plot_to_pdf(timeline_plot, paste0("output/timeline_", date_hour, ".pdf"))
 
