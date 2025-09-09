@@ -7,12 +7,6 @@ remove_accents <- function(texto) {
   iconv(texto, to = "ASCII//TRANSLIT")
 }
 
-# Function to remove numbers from the start and end of the text
-# remove_numbers_from_edges <- function(text) {
-#   text <- gsub("^\\d+", "", text)  # Remove numbers at the start
-#   text <- gsub("\\d+$", "", text)  # Remove numbers at the end
-#   return(text)
-# }
 normalize_document_name <- function(name) {
   name <- tolower(name)
   name <- tools::file_path_sans_ext(name)               # Remove extension
