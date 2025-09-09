@@ -62,7 +62,7 @@ date_hour <- format(Sys.time(), "%d-%m-%Y_%H:%M")
 
 # Procesamiento principal
 cat("\n📊 Preparing data...\n\n")
-main_get_time(directory, date_hour)
+main_get_time(directory, date_hour) # get date
 main_process_texts(directory, language, ngram_number, date_hour)
 
 cat("\n🧮 Performing analysis...\n\n")
